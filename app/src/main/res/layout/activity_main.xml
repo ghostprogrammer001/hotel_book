@@ -9,8 +9,97 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.ghost.com.ghost_projects.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+    <LinearLayout
+        android:id="@+id/month_layout"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Spinner
+            android:id="@+id/year_spin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></Spinner>
+        <Button
+            android:id="@+id/jan"
+            android:onClick="monthclick"
+            android:text="Jan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/feb"
+            android:onClick="monthclick"
+            android:text="Feb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/mar"
+            android:onClick="monthclick"
+            android:text="Mar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/apr"
+            android:onClick="monthclick"
+            android:text="Apr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/may"
+            android:onClick="monthclick"
+            android:text="May"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/jun"
+            android:onClick="monthclick"
+            android:text="jun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/jul"
+            android:onClick="monthclick"
+            android:text="jul"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/aug"
+            android:onClick="monthclick"
+            android:text="Aug"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/sep"
+            android:onClick="monthclick"
+            android:text="Sep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/oct"
+            android:onClick="monthclick"
+            android:text="Oct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/nov"
+            android:onClick="monthclick"
+            android:text="Nov"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/dec"
+            android:onClick="monthclick"
+            android:text="Dec"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <TableLayout
+        android:layout_below="@+id/month_layout"
+        android:id="@+id/tableLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:shrinkColumns="*"
+        android:stretchColumns="*" >
+    </TableLayout>
+
+
 </RelativeLayout>
