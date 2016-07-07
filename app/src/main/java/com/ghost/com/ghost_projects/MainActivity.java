@@ -13,6 +13,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.TableRow.LayoutParams;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         spinner_year.setAdapter(my_year);
         table_layout = (TableLayout) findViewById(R.id.tableLayout1);
 
+
         table_layout.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -46,19 +48,19 @@ public class MainActivity extends AppCompatActivity {
                     int y = (int) event.getRawY();
 
                     for (final java.util.Map.Entry<View, Rect> entry : cells.entrySet()) {
-
                         view = entry.getKey();
                         final Rect rect = entry.getValue();
-                        if (rect.contains(x, y)) {
+                        if (rect.contains(x, 0)) {
+                            log("Need");
                               view.setBackgroundColor(Color.BLUE);
                         } else {
-                        //     view.setBackgroundColor(Color.BLUE);
+                             view.setBackgroundColor(Color.WHITE);
                                // view.setBackgroundColor(Color.RED);
                             //tv.setText("");
                         }
                         //log("text view ");
                     }
-                    //log(x+" "+y);
+                    log(x+" "+y);
                     return true;
                 }
 
@@ -66,6 +68,18 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+    }
+    @Override
+    public void onWindowFocusChanged (boolean hasFocus){
+        super.onWindowFocusChanged(hasFocus);
+        if(hasFocus){
+            _getTextViewCords();
+//            System.out.println("onWindowFocusChanged");
+//            System.out.println("tab1 - left" + btn_Tab7 .getLeft());
+//            System.out.println("tab1 - Top" + btn_Tab7.getTop());
+//            System.out.println("tab1 - right" + btn_Tab7.getRight());
+//            System.out.println("tab1 - bottom" + btn_Tab7.getBottom());
+        }
     }
     private ArrayList<String> getYear(){
         ArrayList<String> tmp = new ArrayList<>();
@@ -126,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
         int to = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
        // this.log("total days "+cal.getActualMaximum(Calendar.DAY_OF_MONTH));
        // this.log("day  "+cal.get(Calendar.DAY_OF_WEEK));
-        BuildTable(1,to);
+        //BuildTable(1,to);
     }
     public void log(String l){
         Log.i("praveen",l);
@@ -140,27 +154,47 @@ public class MainActivity extends AppCompatActivity {
             row.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT));
             // inner for loop
             for (int j = 1; j <= cols; j++) {
-                TextView tv = new TextView(this);
+                final TextView tv = new TextView(this);
                 tv.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
                 tv.setPadding(5, 5, 5, 5);
                 tv.setText("C" + j);
                 row.addView(tv);
+//                tv.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        try{
+//                            tv.setTextColor(Color.RED);
+////                            if(tv.getTag().toString().equals("select")){
+////                                tv.setTextColor(Color.BLACK);
+////                            }else{
+////                                tv.setTag("select");
+////                                tv.setTextColor(Color.RED);
+////                            }
+//                        }catch (Exception e){
+//                            e.printStackTrace();
+//                        }
+//
+//                        //Toast.makeText(MainActivity.this,"" + tv.getText().toString(),Toast.LENGTH_SHORT).show();
+//                    }
+//                });
 
             }
             table_layout.addView(row);
-            for(int c_start = 0; c_start<row.getChildCount();c_start++){
-                log("gettign textview cords");
-                try{
-                    TextView text_view = (TextView) row.getChildAt(c_start);
-                    if(text_view instanceof TextView){
-                        Rect rect = getRawCoordinatesRect(text_view);
-                        cells.put(text_view, rect);
-                    }
-                }catch (Exception e ){
-                    log("Error "+e.getMessage());
-                }
 
-            }
+
+//            for(int c_start = 0; c_start<row.getChildCount();c_start++){
+//                log("gettign textview cords");
+//                try{
+//                    TextView text_view = (TextView) row.getChildAt(c_start);
+//                    if(text_view instanceof TextView){
+//                        Rect rect = getRawCoordinatesRect(text_view);
+//                        cells.put(text_view, rect);
+//                    }
+//                }catch (Exception e ){
+//                    log("Error "+e.getMessage());
+//                }
+//
+//            }
         }
     }
     private Rect getRawCoordinatesRect(final View view) {
@@ -174,5 +208,19 @@ public class MainActivity extends AppCompatActivity {
         rect.bottom = rect.top + view.getHeight();
         return rect;
     }
-
+    private void _getTextViewCords(){
+        TableRow row = (TableRow)table_layout.getChildAt(0);
+        for(int c_start = 0; c_start<row.getChildCount();c_start++){
+            log("gettign textview cords");
+            try{
+                TextView text_view = (TextView) row.getChildAt(c_start);
+                if(text_view instanceof TextView){
+                    Rect rect = getRawCoordinatesRect(text_view);
+                    cells.put(text_view, rect);
+                }
+            }catch (Exception e ){
+                log("Error "+e.getMessage());
+            }
+        }
+    }
 }
